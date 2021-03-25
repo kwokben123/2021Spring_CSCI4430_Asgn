@@ -34,7 +34,7 @@ char* remove_dot(int len, char *ip_addr){
 
 int main(int argc, char **argv) {
 	if (argc < 2){
-		perror("argc < 2");
+		fprintf(stderr, "Usage: %s <dst_ip> <dst_port>\n", argv[0]);
 		exit(1);
 	}
 
@@ -97,9 +97,7 @@ int main(int argc, char **argv) {
 		server_addr.sin_family = AF_INET;
 		server_addr.sin_port = htons(atoi(argv[2]));
 		server_addr.sin_addr.s_addr = inet_addr(des_ip);
-		cout << strlen(des_ip) << endl;
-		cout << "ip_addr: " << des_ip << " port: " << atoi(argv[2]) << endl;	
-
+		
 		if (sendto(sd_H, buffer, strlen(buffer), 0, (const struct sockaddr *)&server_addr, sizeof(server_addr)) < 0){
 			cout << "Horizontal Portscan Error." << endl;
 		}
